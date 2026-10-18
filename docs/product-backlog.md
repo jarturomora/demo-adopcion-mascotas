@@ -1,8 +1,6 @@
 # Backlog de producto
 
-Este documento recoge la estructura funcional de alto nivel de la web de adopción de mascotas. En esta etapa, el alcance se organiza en épicas y funcionalidades, sin descomponerlas todavía en historias de usuario ni tareas técnicas.
-
-Los identificadores `EP-XX` y `F-XX` son estables y permiten mantener la trazabilidad del producto.
+Este documento recoge la estructura funcional de alto nivel de la web de adopción de mascotas.
 
 ## Resumen y trazabilidad
 
