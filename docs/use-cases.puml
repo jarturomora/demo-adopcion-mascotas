@@ -1,0 +1,107 @@
+@startuml web-adopcion-mascotas
+title Web de adopción de mascotas — Diagrama general de casos de uso
+
+left to right direction
+
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor #F8FAFC
+  BorderColor #475569
+  ArrowColor #64748B
+}
+skinparam package {
+  BackgroundColor #F1F5F9
+  BorderColor #334155
+}
+
+actor "Persona\ninteresada" as Interested
+actor "Persona\nadoptante" as Adopter
+actor "Personal de la\nprotectora" as Staff
+actor "Personal\nautorizado" as Authorized
+
+Adopter -|> Interested
+Authorized -|> Staff
+
+rectangle "Web de adopción de mascotas" {
+  package "EP-01. Catálogo de animales" {
+    usecase "F-01\nConsultar animales\ndisponibles" as F01
+    usecase "F-02\nFiltrar animales por\nespecie y características" as F02
+    usecase "F-03\nConsultar la ficha\nde un animal" as F03
+    usecase "F-04\nConsultar fotografías y\ncaracterísticas relevantes" as F04
+    usecase "F-05\nConsultar necesidades especiales\no requisitos específicos" as F05
+  }
+
+  package "EP-02. Solicitudes de adopción" {
+    usecase "F-06\nCrear una solicitud\nde adopción" as F06
+    usecase "F-07\nProporcionar información\ndel posible adoptante" as F07
+    usecase "F-08\nRevisar y enviar\nuna solicitud" as F08
+    usecase "F-09\nConsultar el estado\nde una solicitud" as F09
+    usecase "F-10\nRecibir información sobre\ncambios de estado" as F10
+    usecase "F-11\nRetirar una\nsolicitud abierta" as F11
+  }
+
+  package "EP-03. Gestión de candidaturas" {
+    usecase "F-12\nConsultar solicitudes\nrecibidas" as F12
+    usecase "F-13\nExaminar los datos\nde una candidatura" as F13
+    usecase "F-14\nRegistrar observaciones\ndurante la evaluación" as F14
+    usecase "F-15\nGestionar el estado\nde una candidatura" as F15
+    usecase "F-16\nAprobar o rechazar\ncandidaturas" as F16
+    usecase "F-17\nComparar candidaturas\nde un mismo animal" as F17
+  }
+
+  package "EP-04. Seguimiento de la adopción" {
+    usecase "F-18\nFormalizar una\nadopción" as F18
+    usecase "F-19\nRegistrar que un animal\nha sido adoptado" as F19
+    usecase "F-20\nProporcionar información\nde la adopción" as F20
+    usecase "F-21\nProgramar seguimientos\nposteriores" as F21
+    usecase "F-22\nRegistrar información sobre\nla adaptación del animal" as F22
+    usecase "F-23\nMantener el historial\nde seguimiento" as F23
+  }
+
+  package "EP-05. Administración de animales" {
+    usecase "F-24\nRegistrar un\nnuevo animal" as F24
+    usecase "F-25\nModificar la información\nde un animal" as F25
+    usecase "F-26\nGestionar el estado\nde un animal" as F26
+    usecase "F-27\nPublicar un animal\npara adopción" as F27
+    usecase "F-28\nRetirar temporalmente un\nanimal del catálogo" as F28
+  }
+}
+
+Interested -- F01
+Interested -- F02
+Interested -- F03
+Interested -- F04
+Interested -- F05
+Interested -- F06
+Interested -- F07
+Interested -- F08
+Interested -- F09
+Interested -- F10
+Interested -- F11
+
+Staff -- F12
+Staff -- F13
+Staff -- F14
+Staff -- F15
+Staff -- F16
+Staff -- F17
+Staff -- F18
+Staff -- F19
+Staff -- F20
+Staff -- F21
+Staff -- F22
+Staff -- F23
+
+Adopter -- F18
+Adopter -- F20
+Adopter -- F22
+
+Authorized -- F24
+Authorized -- F25
+Authorized -- F26
+Authorized -- F27
+Authorized -- F28
+
+@enduml
