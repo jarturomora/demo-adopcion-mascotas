@@ -98,6 +98,21 @@
             <span class="field-error" id="email-error"></span>
           </div>
 
+          <div class="form-field">
+            <label for="comments">Comentarios</label>
+            <textarea
+              id="comments"
+              name="comments"
+              rows="5"
+              minlength="10"
+              maxlength="1000"
+              required
+              aria-describedby="comments-hint comments-error"
+            ></textarea>
+            <small id="comments-hint">Describe brevemente tu consulta.</small>
+            <span class="field-error" id="comments-error"></span>
+          </div>
+
           <label class="consent-field">
             <input id="consent" name="consent" type="checkbox" required>
             <span>Acepto que se utilicen estos datos para responder a mi consulta.</span>
