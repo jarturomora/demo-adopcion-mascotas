@@ -1,0 +1,67 @@
+name: Pruebas E2E - Huellas
+
+on:
+  push:
+    branches:
+      - main
+      - pruebas-e2e
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas-e2e:
+    name: Probar formulario con Playwright
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Obtener código
+        uses: actions/checkout@v7
+
+      - name: Preparar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: web/requirements-test.txt
+
+      - name: Instalar pytest y Playwright
+        run: |
+          python -m pip install -r web/requirements-test.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Iniciar servidor y comprobar disponibilidad
+        run: |
+          python -m http.server 8000 --bind 127.0.0.1 --directory web > /tmp/huellas-server.log 2>&1 &
+          python - <<'PY'
+          import time
+          import urllib.request
+          url = "http://127.0.0.1:8000/contacto.html"
+          for attempt in range(30):
+              try:
+                  with urllib.request.urlopen(url, timeout=2) as response:
+                      if response.status == 200:
+                          print("Servidor web preparado")
+                          break
+              except Exception:
+                  time.sleep(1)
+          else:
+              raise SystemExit("El servidor web no está disponible")
+          PY
+
+      - name: Ejecutar pruebas E2E
+        working-directory: web
+        run: python -m pytest tests/test_contacto.py -v --tracing=retain-on-failure
+
+      - name: Guardar trazas de errores
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: trazas-playwright
+          path: web/test-results/
+          if-no-files-found: ignore
