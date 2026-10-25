@@ -153,16 +153,10 @@ Playwright permite esperar automáticamente ciertos cambios de la página, reduc
 3. ¿Por qué tiene sentido repetir estas pruebas después de cada cambio?
 4. ¿Qué limitación tiene validar el formulario sin comprobar que el servidor recibe y guarda la información?
 
-## 9. Próximo paso: automatización en GitHub Actions
-
-En el segundo vídeo reutilizaremos estas mismas pruebas dentro de un workflow para comprobar pull requests. El workflow necesitará instalar Python, dependencias, Chromium e iniciar el servidor HTTP local antes de ejecutar pytest.
-
-## 10. Solución de problemas
+## 9. Solución de problemas
 
 - **`Connection refused` o `ERR_CONNECTION_REFUSED`:** verifica que el servidor del paso 4 sigue ejecutándose y que abriste el terminal en `web/`.
 - **`No module named pytest` o Playwright:** vuelve a activar `huellas-env` con `source huellas-env/Scripts/activate` e instala `requirements-test.txt`.
 - **No se encuentra el ejecutable de Chromium:** ejecuta `python -m playwright install chromium`.
 - **El puerto 8000 está ocupado:** cierra el servidor anterior o usa otro puerto y define `HUELLAS_BASE_URL` con la URL correspondiente antes de ejecutar pytest.
 - **Git Bash no activa el entorno:** comprueba que estás en `web/` y que existe `huellas-env/Scripts/activate`. También puedes ejecutar directamente `./huellas-env/Scripts/python.exe -m pytest tests/test_contacto.py -v`.
-
-**Nota:** las pruebas actuales cubren la experiencia del formulario en navegador, no demuestran persistencia en una base de datos ni envío de mensajes: esas capacidades no existen en esta maqueta.
