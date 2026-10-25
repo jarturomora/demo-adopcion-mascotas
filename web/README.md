@@ -1,8 +1,6 @@
-# Huellas: tutorial de pruebas automatizadas con Python y Playwright
+# Huellas - Adopción de Mascotas: tutorial de pruebas automatizadas con Python y Playwright
 
-**Procesos en Ingeniería del Software — Tema 7. Pruebas modernas dentro del proceso de desarrollo**
-
-Este tutorial utiliza la web existente de adopción de mascotas, **Huellas**, para aprender a ejecutar pruebas automáticas sobre un formulario real. No modificamos su comportamiento ni añadimos un backend. El formulario es una *maqueta*: valida los campos y muestra una confirmación, pero **no envía ni almacena datos**.
+Este tutorial utiliza la web existente de adopción de mascotas, **Huellas**, para aprender a ejecutar pruebas automáticas sobre un formulario real.
 
 ## Objetivos
 
@@ -46,17 +44,19 @@ Los comandos siguientes se ejecutan **desde `web/`**. Si ya tienes el repositori
 
 ## 3. Preparar el entorno Python
 
-Crea un entorno virtual:
+Crea el entorno virtual desde **Git Bash** en Windows. Sitúate en el directorio `web/` y llámalo `huellas-env`:
 
 ```bash
-python -m venv .venv
+python -m venv huellas-env
 ```
 
-Actívalo:
+Actívalo desde Git Bash:
 
-- **Windows PowerShell:** `.venv\\Scripts\\Activate.ps1`
-- **Windows CMD:** `.venv\\Scripts\\activate.bat`
-- **macOS/Linux:** `source .venv/bin/activate`
+```bash
+source huellas-env/Scripts/activate
+```
+
+Cuando esté activo, `(huellas-env)` aparecerá al principio de la línea de comandos. Ejecuta con el entorno activo todos los comandos Python de los pasos siguientes.
 
 Instala las dependencias y el navegador Chromium controlado por Playwright:
 
@@ -65,7 +65,11 @@ python -m pip install -r requirements-test.txt
 python -m playwright install chromium
 ```
 
-> En Linux, algunas instalaciones necesitan dependencias adicionales del sistema. Consulta la documentación de Playwright si la instalación del navegador lo solicita.
+Para salir del entorno virtual cuando termines:
+
+```bash
+deactivate
+```
 
 ## 4. Iniciar el servidor local
 
@@ -156,9 +160,9 @@ En el segundo vídeo reutilizaremos estas mismas pruebas dentro de un workflow p
 ## 10. Solución de problemas
 
 - **`Connection refused` o `ERR_CONNECTION_REFUSED`:** verifica que el servidor del paso 4 sigue ejecutándose y que abriste el terminal en `web/`.
-- **`No module named pytest` o Playwright:** vuelve a activar `.venv` e instala `requirements-test.txt`.
+- **`No module named pytest` o Playwright:** vuelve a activar `huellas-env` con `source huellas-env/Scripts/activate` e instala `requirements-test.txt`.
 - **No se encuentra el ejecutable de Chromium:** ejecuta `python -m playwright install chromium`.
 - **El puerto 8000 está ocupado:** cierra el servidor anterior o usa otro puerto y define `HUELLAS_BASE_URL` con la URL correspondiente antes de ejecutar pytest.
-- **PowerShell bloquea la activación:** puedes ejecutar directamente `.venv\\Scripts\\python.exe -m pytest tests/test_contacto.py -v`.
+- **Git Bash no activa el entorno:** comprueba que estás en `web/` y que existe `huellas-env/Scripts/activate`. También puedes ejecutar directamente `./huellas-env/Scripts/python.exe -m pytest tests/test_contacto.py -v`.
 
 **Nota:** las pruebas actuales cubren la experiencia del formulario en navegador, no demuestran persistencia en una base de datos ni envío de mensajes: esas capacidades no existen en esta maqueta.
