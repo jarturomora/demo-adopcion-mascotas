@@ -1,8 +1,4 @@
-# Tema 7 · Vídeo 2 — Pruebas automatizadas con GitHub Actions
-
-Este material complementa `web/README.md` de la rama `pruebas-e2e`. Reutiliza las
-siete pruebas E2E del formulario de contacto de Huellas y automatiza su ejecución
-en GitHub Actions.
+# Pruebas automatizadas con GitHub Actions
 
 ## 1. Incorporar el workflow
 
